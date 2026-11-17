@@ -1,0 +1,18 @@
+const { DataTypes } = require('sequelize');
+
+// Tabela "product_options": opções do produto (tamanho, cor...).
+// "values" guarda todas as opções separadas por vírgula (ex.: "39,40,41").
+module.exports = (sequelize) =>
+  sequelize.define(
+    'ProductOption',
+    {
+      id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+      product_id: { type: DataTypes.INTEGER, allowNull: false },
+      title: { type: DataTypes.STRING, allowNull: false },
+      shape: { type: DataTypes.ENUM('square', 'circle'), defaultValue: 'square' },
+      radius: { type: DataTypes.INTEGER, defaultValue: 0 },
+      type: { type: DataTypes.ENUM('text', 'color'), defaultValue: 'text' },
+      values: { type: DataTypes.STRING, allowNull: false },
+    },
+    { tableName: 'product_options', timestamps: false }
+  );
